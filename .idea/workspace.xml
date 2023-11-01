@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="Implementierung der Lebensmittel Klasse in der GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/testtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testtest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +43,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.testtest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.Main" />
       <module name="Studientransferprojekt1" />
@@ -71,8 +72,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.testtest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.testtest" />
       </list>
     </recent_temporary>
   </component>
@@ -141,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698851413032</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implementierung der Lebensmittel Klasse in der GUI">
+      <created>1698853074426</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698853074426</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

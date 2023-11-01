@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class testtest {
-    public static class Lebensmittel extends JFrame{
+    public static class Lebensmittel {
         //int id;
         String LebensmittelName;
         LocalDate MHD;
