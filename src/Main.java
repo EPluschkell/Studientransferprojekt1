@@ -173,6 +173,7 @@ public class Main {
         panel.add(btn);
         //zweiter reiter, einfach nur die table:
         JTable table = new JTable();
+        table.setAutoCreateRowSorter(true);
         DefaultTableModel dtm = new DefaultTableModel(0,0);
         dtm.setColumnIdentifiers(columnNames);
         table.setModel(dtm);
