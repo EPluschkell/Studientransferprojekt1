@@ -24,7 +24,7 @@ public class testtest extends Frame {
     private TextField inputDate;
     private TextArea listText;
     private Button btn;// Declare a Button component
-    public ArrayList<Essen> list = new ArrayList<Essen>();
+    public ArrayList<Essen> list = new ArrayList<>();
 
     // Constructor to setup GUI components and event handlers
     public testtest () {

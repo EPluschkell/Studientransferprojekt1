@@ -1,6 +1,8 @@
 package src;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static class Lebensmittel {
@@ -26,10 +28,11 @@ public class Main {
             MHD = LocalDate.now();
             angebrochen = false;
             menge = 1;
-            gml = true;
+            gml = false;
             mhdueberschritten = !MHD.isAfter(LocalDate.now());
         }
 
+        @Override
         public String toString(){
             String angebrochenString;
             String einheit;
@@ -48,6 +51,7 @@ public class Main {
         }
 
     }
+    public static ArrayList<Lebensmittel> kuehlschrank = new ArrayList<>();
     public static void main(String[] args) {
         String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
@@ -61,7 +65,11 @@ public class Main {
         } else{
             System.out.println("Das Lebensmittel " + Fleisch.LebensmittelName + " ist noch " + datum1.until(LocalDate.now()) + " haltbar.");
         }
-        System.out.println(Fleisch.toString());
-
+        System.out.println(Fleisch);
+        kuehlschrank.add(Fleisch);
+        Lebensmittel testLebensmittel = new Lebensmittel();
+        kuehlschrank.add(testLebensmittel);
+        System.out.println(kuehlschrank.toString());
     }
+
 }

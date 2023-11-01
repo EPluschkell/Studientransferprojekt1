@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="ein paar kleine fixes">
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="toString eingebaut">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testtest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698838708579</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="toString eingebaut">
+      <created>1698839484778</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698839484778</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -109,6 +118,7 @@
     <MESSAGE value="default constructor eingebaut" />
     <MESSAGE value="gui test eingebaut" />
     <MESSAGE value="ein paar kleine fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="ein paar kleine fixes" />
+    <MESSAGE value="toString eingebaut" />
+    <option name="LAST_COMMIT_MESSAGE" value="toString eingebaut" />
   </component>
 </project>
