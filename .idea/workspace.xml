@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="" />
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="default constructor eingebaut">
+      <change beforePath="$PROJECT_DIR$/src/testtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testtest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,7 +34,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/eplus/IdeaProjects/Studientransferprojekt1"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -44,6 +47,14 @@
       <option name="presentableId" value="Default" />
       <updated>1698336514262</updated>
     </task>
+    <task id="LOCAL-00001" summary="default constructor eingebaut">
+      <created>1698838152143</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698838152143</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -56,5 +67,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="default constructor eingebaut" />
+    <option name="LAST_COMMIT_MESSAGE" value="default constructor eingebaut" />
   </component>
 </project>
