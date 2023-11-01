@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="default constructor eingebaut">
-      <change beforePath="$PROJECT_DIR$/src/testtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testtest.java" afterDir="false" />
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="gui test eingebaut">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,10 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/eplus/IdeaProjects/Studientransferprojekt1"
+    "last_opened_file_path": "C:/Users/eplus/IdeaProjects/Studientransferprojekt1",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -54,7 +57,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698838152143</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="gui test eingebaut">
+      <created>1698838353814</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698838353814</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -70,6 +80,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="default constructor eingebaut" />
-    <option name="LAST_COMMIT_MESSAGE" value="default constructor eingebaut" />
+    <MESSAGE value="gui test eingebaut" />
+    <option name="LAST_COMMIT_MESSAGE" value="gui test eingebaut" />
   </component>
 </project>
