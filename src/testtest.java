@@ -2,9 +2,55 @@ package src;
 
 import java.awt.*;        // Using AWT container and component classes
 import java.awt.event.*;  // Using AWT event classes and listener interfaces
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class testtest extends Frame {
+    public static class Lebensmittel {
+        //int id;
+        String LebensmittelName;
+        LocalDate MHD;
+        Boolean angebrochen;
+        int menge;
+        Boolean gml; // true = g false = ml
+        Boolean mhdueberschritten; // true = ist abgelaufen
+        public Lebensmittel(String Name, LocalDate Datum, Boolean Angebrochen, int Menge, Boolean Einheit){
+            LebensmittelName = Name;
+            MHD = Datum;
+            angebrochen = Angebrochen;
+            menge = Menge;
+            gml = Einheit;
+            mhdueberschritten = !MHD.isAfter(LocalDate.now());
+            //id = 1;
+        }
+        //default contructor, falls nichts angegeben wird.
+        public Lebensmittel(){
+            LebensmittelName = "Default";
+            MHD = LocalDate.now();
+            angebrochen = false;
+            menge = 1;
+            gml = false;
+            mhdueberschritten = !MHD.isAfter(LocalDate.now());
+        }
+        @Override
+        public String toString(){
+            String angebrochenString;
+            String einheit;
+            int timeLeft = MHD.compareTo(LocalDate.now());
+            if (angebrochen){
+                angebrochenString = "Angebrochen";
+            }else {
+                angebrochenString = "nicht Angebrochen";
+            }
+            if (gml){
+                einheit = "g";
+            }else {
+                einheit = "ml";
+            }
+            return LebensmittelName + " mit Ablaufdatum "+MHD+", "+timeLeft+" Tage übrig. "+menge+einheit+", "+angebrochenString;
+        }
+
+    }
     public static class Essen {
         String EssenName;
         String EssenAblaufdatum;
@@ -25,6 +71,7 @@ public class testtest extends Frame {
     private TextArea listText;
     private Button btn;// Declare a Button component
     public ArrayList<Essen> list = new ArrayList<>();
+    public ArrayList<Lebensmittel> lebensmittelList = new ArrayList<>();
 
     // Constructor to setup GUI components and event handlers
     public testtest () {
