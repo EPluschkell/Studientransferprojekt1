@@ -47,6 +47,9 @@ public class Main {
             }else {
                 einheit = "ml";
             }
+            if(mhdueberschritten){
+                return LebensmittelName + " mit Ablaufdatum "+MHD+" ist abgelaufen. "+menge+einheit+", "+angebrochenString;
+            }
         return LebensmittelName + " mit Ablaufdatum "+MHD+", "+timeLeft+" Tage übrig. "+menge+einheit+", "+angebrochenString;
         }
 

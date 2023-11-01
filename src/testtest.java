@@ -4,9 +4,10 @@ import java.awt.*;        // Using AWT container and component classes
 import java.awt.event.*;  // Using AWT event classes and listener interfaces
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.*;
 
-public class testtest extends Frame {
-    public static class Lebensmittel {
+public class testtest {
+    public static class Lebensmittel extends JFrame{
         //int id;
         String LebensmittelName;
         LocalDate MHD;
@@ -66,16 +67,22 @@ public class testtest extends Frame {
             return EssenName + ':' + EssenAblaufdatum ;
         }
     }
-    private TextField inputName;
+   /* private TextField inputName;
     private TextField inputDate;
     private TextArea listText;
-    private Button btn;// Declare a Button component
+    private Button btn;// Declare a Button component*/
+    private JTextArea listText;
+    private JTextField inputName;
+    private JTextField inputDay;
+    private JTextField inputMonth;
+    private JTextField inputYear;
+    private JButton btn;
     public ArrayList<Essen> list = new ArrayList<>();
     public ArrayList<Lebensmittel> lebensmittelList = new ArrayList<>();
 
     // Constructor to setup GUI components and event handlers
     public testtest () {
-        setLayout(new FlowLayout());
+       /* setLayout(new FlowLayout());
         // "super" Frame, which is a Container, sets its layout to FlowLayout to arrange
         // the components from left-to-right, and flow to next row from top-to-bottom.
 
@@ -100,17 +107,51 @@ public class testtest extends Frame {
         setSize(600, 300);        // "super" Frame sets its initial window size
 
         // For inspecting the Container/Components objects
-        setVisible(true);         // "super" Frame shows
+        setVisible(true);         // "super" Frame shows*/
+        JFrame frame = new JFrame("Test Frame");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
+        JPanel panel = new JPanel();
+        inputName = new JTextField(15);
+        panel.add(inputName);
+        inputDay = new JTextField(10);
+        panel.add(inputDay);
+        btn = new JButton("Enter");
+        panel.add(btn);
+
+        JPanel panel1 = new JPanel();
+        listText = new JTextArea();
+        panel.add(listText);
+
+        frame.getContentPane().add(BorderLayout.NORTH, panel);
+        frame.getContentPane().add(BorderLayout.SOUTH, panel1);
+        frame.setVisible(true);
+
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listText.setText("");
+                Essen placeholder;
+                placeholder = new Essen(inputName.getText(), inputDay.getText());
+                list.add(placeholder);
+                String textPlaceholder="";
+                //listText.setText(list.toString());
+                for(int i=0;i<list.size();i++){
+                    //list.get(i).toString();
+                    //listText.setText((list.get(i)).toString());
+                    listText.append((list.get(i)).toString()+"\n");
+                }
+            }
+        });
     }
 
     // The entry main() method
     public static void main(String[] args) {
         // Invoke the constructor to setup the GUI, by allocating an instance
         testtest app = new testtest();
-        // or simply "new AWTCounter();" for an anonymous instance
     }
 
-    private class btnListener implements ActionListener{
+    /*private class btnListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent evt) {
             listText.setText("");
@@ -125,6 +166,6 @@ public class testtest extends Frame {
                 listText.append((list.get(i)).toString()+"\n");
             }
         }
-    }
+    }*/
 }
 
