@@ -30,10 +30,27 @@ public class Main {
             mhdueberschritten = !MHD.isAfter(LocalDate.now());
         }
 
+        public String toString(){
+            String angebrochenString;
+            String einheit;
+            int timeLeft = MHD.compareTo(LocalDate.now());
+            if (angebrochen){
+                angebrochenString = "Angebrochen";
+            }else {
+                angebrochenString = "nicht Angebrochen";
+            }
+            if (gml){
+                einheit = "g";
+            }else {
+                einheit = "ml";
+            }
+        return LebensmittelName + " mit Ablaufdatum "+MHD+", "+timeLeft+" Tage übrig. "+menge+einheit+", "+angebrochenString;
+        }
+
     }
     public static void main(String[] args) {
         String name1 = "Rinderhack";
-        LocalDate datum1 = LocalDate.of(2023,10,30);
+        LocalDate datum1 = LocalDate.of(2023,11,15);
         Boolean angebrochen1 = false;
         int menge1 = 500;
         boolean einheit1 = true; //gramm
@@ -44,6 +61,7 @@ public class Main {
         } else{
             System.out.println("Das Lebensmittel " + Fleisch.LebensmittelName + " ist noch " + datum1.until(LocalDate.now()) + " haltbar.");
         }
+        System.out.println(Fleisch.toString());
 
     }
 }
