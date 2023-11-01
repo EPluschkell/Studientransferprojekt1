@@ -18,6 +18,15 @@ public class Main {
             mhdueberschritten = !MHD.isAfter(LocalDate.now());
             //id = 1;
         }
+        //default contructor, falls nichts angegeben wird.
+        public Lebensmittel(){
+            LebensmittelName = "Default";
+            MHD = LocalDate.now();
+            angebrochen = false;
+            menge = 1;
+            gml = true;
+            mhdueberschritten = !MHD.isAfter(LocalDate.now());
+        }
 
     }
     public static void main(String[] args) {
