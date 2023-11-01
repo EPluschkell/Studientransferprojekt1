@@ -17,6 +17,7 @@ public class Main {
         int menge;
         Boolean gml; // true = g false = ml
         Boolean mhdueberschritten; // true = ist abgelaufen
+        //Constructor für Lebensmittel Klasse
         public Lebensmittel(String Name, LocalDate Datum, Boolean Angebrochen, int Menge, Boolean Einheit){
             LebensmittelName = Name;
             MHD = Datum;
@@ -36,8 +37,9 @@ public class Main {
             mhdueberschritten = !MHD.isAfter(LocalDate.now());
         }
 
+        //ausgabe als object array, für die Ansicht in Tabelle nötig.
         public Object[] toArray(){
-            int timeLeft = MHD.compareTo(LocalDate.now());
+            long timeLeft = daysBetweenDates(LocalDate.now(),MHD);
             String einheit;
             if (gml){
                 einheit = "g";
@@ -107,6 +109,8 @@ public class Main {
             });
         }
     }
+
+    //deklarationen für die GUI
     private JTextField inputName;
     private JTextField inputDay;
     private JTextField inputMonth;
@@ -115,10 +119,9 @@ public class Main {
     private JButton btn;
     private JToggleButton btnAngebr;
     private JToggleButton btnGML;
-    //public ArrayList<testtest.Lebensmittel> lebensmittelList = new ArrayList<>();
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
     public Main(){
-
+        //test daten, später mit Import gespeicherter daten auszuwechseln
         String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
         Boolean angebrochen1 = false;
@@ -136,12 +139,12 @@ public class Main {
         kuehlschrank.sortByMHD();
 
 
-
+        //frame und panel aufgesetzt
         JFrame frame = new JFrame("Test Frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(450, 400);
         JPanel panel = new JPanel();
-
+        //labels und inputs aufsetzen
         JLabel label1 = new JLabel("Name:");
         panel.add(label1);
         inputName = new JTextField(8);
@@ -168,7 +171,7 @@ public class Main {
         panel.add(btnAngebr);
         btn = new JButton("Enter");
         panel.add(btn);
-
+        //zweiter reiter, einfach nur die table:
         JTable table = new JTable();
         DefaultTableModel dtm = new DefaultTableModel(0,0);
         dtm.setColumnIdentifiers(columnNames);
@@ -177,17 +180,16 @@ public class Main {
             dtm.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
         }
 
-
+        //zweite pane und tabs aufsetzen
         JScrollPane scrollPane = new JScrollPane(table);
-
         JTabbedPane tabpane = new JTabbedPane();
         tabpane.add("input",panel);
         tabpane.add("output", scrollPane);
 
-
+        //die tabpane auf die frame setzen
         frame.getContentPane().add(tabpane);
         frame.setVisible(true);
-
+        //aktionen, die passieren sollen, wenn der enter button gedrückt wird
         btn.addActionListener(e -> {
             Lebensmittel placeholder;
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
@@ -201,6 +203,7 @@ public class Main {
         });
     }
     public static void main(String[] args) {
+        /*
         String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
         Boolean angebrochen1 = false;
@@ -220,7 +223,7 @@ public class Main {
         // Ausgabe
         for (Lebensmittel lebensmittel : kuehlschrank.lebensmittelListe) {
             System.out.println(lebensmittel);
-        }
+        }*/
 
         Main app = new Main();
     }
