@@ -135,7 +135,7 @@ public class Main {
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
     public Main() {
         //test daten, später mit Import gespeicherter daten auszuwechseln
-        String name1 = "Rinderhack";
+        /*String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
         Boolean angebrochen1 = false;
         int menge1 = 500;
@@ -149,7 +149,26 @@ public class Main {
         kuehlschrank.add(Fleisch);
         kuehlschrank.add(joghurt);
         kuehlschrank.add(kaese);
-        kuehlschrank.sortByMHD();
+        kuehlschrank.sortByMHD();*/
+        /*if (loadFromFile("")==null){
+            String name1 = "Rinderhack";
+            LocalDate datum1 = LocalDate.of(2023,11,15);
+            Boolean angebrochen1 = false;
+            int menge1 = 500;
+            boolean einheit1 = true; //gramm
+
+            Lebensmittel Fleisch = new Lebensmittel(name1,datum1,angebrochen1,menge1,einheit1);
+            Lebensmittel joghurt = new Lebensmittel("Joghurt", LocalDate.of(2023, 10, 31), true, 200, false);
+            Lebensmittel kaese = new Lebensmittel("Käse", LocalDate.of(2023, 11, 30), false, 300, true);
+
+            Kuehlschrank kuehlschrank = new Kuehlschrank();
+            kuehlschrank.add(Fleisch);
+            kuehlschrank.add(joghurt);
+            kuehlschrank.add(kaese);
+            kuehlschrank.sortByMHD();
+            saveToFile(kuehlschrank, "test.txt");
+        }*/
+        Kuehlschrank kuehlschrank = loadFromFile("test.txt");
 
 
         //frame und panel aufgesetzt
@@ -191,6 +210,7 @@ public class Main {
         delBtn = new JButton("Löschen");
         panel.add(delBtn);
         saveBtn = new JButton("Speichern");
+        panel.add(saveBtn);
         //zweiter reiter, einfach nur die table:
         JTable table = new JTable();
         table.setAutoCreateRowSorter(true);
@@ -234,7 +254,7 @@ public class Main {
             tableReset(dtm, kuehlschrank);
         });
         saveBtn.addActionListener(e -> {
-
+            saveToFile(kuehlschrank, "test.txt");
         });
 
     }
