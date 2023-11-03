@@ -118,7 +118,10 @@ public class Main {
     private JTextField inputMonth;
     private JTextField inputYear;
     private JTextField inputAmount;
+    private JTextField delInput;
     private JButton btn;
+    private JButton delBtn;
+    private JButton saveBtn;
     private JToggleButton btnAngebr;
     private JToggleButton btnGML;
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
@@ -142,7 +145,7 @@ public class Main {
 
 
         //frame und panel aufgesetzt
-        JFrame frame = new JFrame("Test Frame");
+        JFrame frame = new JFrame("Kühlschrank");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(450, 400);
         JPanel panel = new JPanel();
@@ -173,6 +176,13 @@ public class Main {
         panel.add(btnAngebr);
         btn = new JButton("Enter");
         panel.add(btn);
+        JLabel label6 = new JLabel("Nummer zum Löschen:");
+        panel.add(label6);
+        delInput = new JTextField(3);
+        panel.add(delInput);
+        delBtn = new JButton("Löschen");
+        panel.add(delBtn);
+        saveBtn = new JButton("Speichern");
         //zweiter reiter, einfach nur die table:
         JTable table = new JTable();
         table.setAutoCreateRowSorter(true);
@@ -209,6 +219,14 @@ public class Main {
             inputDay.setText("");
             inputYear.setText("");
             inputAmount.setText("");
+        });
+        delBtn.addActionListener(e -> {
+            int placeholder = Integer.parseInt(delInput.getText());
+            kuehlschrank.lebensmittelListe.remove(placeholder-1);
+            tableReset(dtm, kuehlschrank);
+        });
+        saveBtn.addActionListener(e -> {
+
         });
 
     }
