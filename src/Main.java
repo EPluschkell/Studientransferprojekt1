@@ -34,7 +34,7 @@ public class Main {
             angebrochen = Angebrochen;
             menge = Menge;
             gml = Einheit;
-            mhdueberschritten = !MHD.isAfter(LocalDate.now());
+            mhdBerechnung();
             //id = 1;
         }
         //default contructor, falls nichts angegeben wird.
@@ -44,11 +44,12 @@ public class Main {
             angebrochen = false;
             menge = 1;
             gml = false;
-            mhdueberschritten = !MHD.isAfter(LocalDate.now());
+            mhdBerechnung();
         }
 
         //ausgabe als object array, für die Ansicht in Tabelle nötig.
         public Object[] toArray(){
+            mhdBerechnung();
             long timeLeft = daysBetweenDates(LocalDate.now(),MHD);
             String einheit;
             if (gml){
@@ -64,6 +65,9 @@ public class Main {
             object[4]=angebrochen;
             object[5]=mhdueberschritten;
             return object;
+        }
+        public void mhdBerechnung(){
+            mhdueberschritten= daysBetweenDates(LocalDate.now(), MHD)<0;
         }
         @Override
         public String toString(){
@@ -135,21 +139,6 @@ public class Main {
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
     public Main() {
         //test daten, später mit Import gespeicherter daten auszuwechseln
-        /*String name1 = "Rinderhack";
-        LocalDate datum1 = LocalDate.of(2023,11,15);
-        Boolean angebrochen1 = false;
-        int menge1 = 500;
-        boolean einheit1 = true; //gramm
-
-        Lebensmittel Fleisch = new Lebensmittel(name1,datum1,angebrochen1,menge1,einheit1);
-        Lebensmittel joghurt = new Lebensmittel("Joghurt", LocalDate.of(2023, 10, 31), true, 200, false);
-        Lebensmittel kaese = new Lebensmittel("Käse", LocalDate.of(2023, 11, 30), false, 300, true);
-
-        Kuehlschrank kuehlschrank = new Kuehlschrank();
-        kuehlschrank.add(Fleisch);
-        kuehlschrank.add(joghurt);
-        kuehlschrank.add(kaese);
-        kuehlschrank.sortByMHD();*/
         /*if (loadFromFile("")==null){
             String name1 = "Rinderhack";
             LocalDate datum1 = LocalDate.of(2023,11,15);
@@ -218,12 +207,6 @@ public class Main {
         dtm.setColumnIdentifiers(columnNames);
         table.setModel(dtm);
         tableReset(dtm,kuehlschrank);
-        /*for(int i=0;i<kuehlschrank.lebensmittelListe.size();i++){
-            dtm.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
-            if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten){
-                JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
-            }
-        }*/
 
         //zweite pane und tabs aufsetzen
         JScrollPane scrollPane = new JScrollPane(table);
@@ -240,8 +223,6 @@ public class Main {
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
             kuehlschrank.lebensmittelListe.add(placeholder);
             tableReset(dtm ,kuehlschrank);
-            /*dtm.addRow(kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).toArray());
-            JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);*/
             inputName.setText("");
             inputMonth.setText("");
             inputDay.setText("");
