@@ -179,12 +179,13 @@ public class Main {
         DefaultTableModel dtm = new DefaultTableModel(0,0);
         dtm.setColumnIdentifiers(columnNames);
         table.setModel(dtm);
-        for(int i=0;i<kuehlschrank.lebensmittelListe.size();i++){
+        tableReset(dtm,kuehlschrank);
+        /*for(int i=0;i<kuehlschrank.lebensmittelListe.size();i++){
             dtm.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
             if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten){
                 JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
+        }*/
 
         //zweite pane und tabs aufsetzen
         JScrollPane scrollPane = new JScrollPane(table);
@@ -200,14 +201,16 @@ public class Main {
             Lebensmittel placeholder;
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
             kuehlschrank.lebensmittelListe.add(placeholder);
-            dtm.addRow(kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).toArray());
-            JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+            tableReset(dtm ,kuehlschrank);
+            /*dtm.addRow(kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).toArray());
+            JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);*/
             inputName.setText("");
             inputMonth.setText("");
             inputDay.setText("");
             inputYear.setText("");
             inputAmount.setText("");
         });
+
     }
     public static void main(String[] args) {
         /*
@@ -239,6 +242,22 @@ public class Main {
         // datum1  = heute, datum2 = mhd
         long Tage = datum2.toEpochDay() - datum1.toEpochDay();
         return Tage;
+    }
+
+    //Methode, um die table neu aufzubauen, nach mhd sortiert und mit allen Daten.
+    public void tableReset(DefaultTableModel table, Kuehlschrank kuehlschrank){
+        kuehlschrank.sortByMHD();
+        if (table.getRowCount()!=0){
+            table.removeRow(0);
+            tableReset(table, kuehlschrank);
+        }else {
+            for (int i = 0; i < kuehlschrank.lebensmittelListe.size(); i++) {
+                table.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
+                if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten){
+                    JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }
 
 
