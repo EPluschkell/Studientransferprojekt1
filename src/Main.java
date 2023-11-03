@@ -1,12 +1,14 @@
 package src;
 
-import java.lang.reflect.Array;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.applet.*;
 
 public class Main {
     public static class Lebensmittel {
@@ -120,7 +122,7 @@ public class Main {
     private JToggleButton btnAngebr;
     private JToggleButton btnGML;
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
-    public Main(){
+    public Main() {
         //test daten, später mit Import gespeicherter daten auszuwechseln
         String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
@@ -179,6 +181,9 @@ public class Main {
         table.setModel(dtm);
         for(int i=0;i<kuehlschrank.lebensmittelListe.size();i++){
             dtm.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
+            if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten){
+                JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
         //zweite pane und tabs aufsetzen
@@ -196,6 +201,7 @@ public class Main {
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
             kuehlschrank.lebensmittelListe.add(placeholder);
             dtm.addRow(kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).toArray());
+            JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(kuehlschrank.lebensmittelListe.size()-1).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
             inputName.setText("");
             inputMonth.setText("");
             inputDay.setText("");
@@ -236,4 +242,4 @@ public class Main {
     }
 
 
-}
+        }

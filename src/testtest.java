@@ -122,6 +122,9 @@ public class testtest {
         table.setModel(dtm);
         for(int i=0;i<lebensmittelList.size();i++){
             dtm.addRow(lebensmittelList.get(i).toArray());
+            if (lebensmittelList.get(i).mhdueberschritten){
+                JOptionPane.showMessageDialog(null, lebensmittelList.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
 
@@ -140,6 +143,7 @@ public class testtest {
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
             lebensmittelList.add(placeholder);
             dtm.addRow(lebensmittelList.get(lebensmittelList.size()-1).toArray());
+            JOptionPane.showMessageDialog(null, lebensmittelList.get(lebensmittelList.size()-1).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
             inputName.setText("");
             inputMonth.setText("");
             inputDay.setText("");
