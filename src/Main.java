@@ -2,16 +2,24 @@ package src;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.*;
+import java.io.Serializable;
 import javax.swing.table.DefaultTableModel;
 import java.applet.*;
 
+
+
+
 public class Main {
-    public static class Lebensmittel {
+    public static class Lebensmittel implements Serializable {
         //int id;
         String LebensmittelName;
         LocalDate MHD;
@@ -81,7 +89,7 @@ public class Main {
         }
 
     }
-    public static class Kuehlschrank {
+    public static class Kuehlschrank implements Serializable {
         ArrayList<Lebensmittel> lebensmittelListe;
 
         public Kuehlschrank() {
@@ -277,6 +285,23 @@ public class Main {
             }
         }
     }
-
-
+    public static void saveToFile(Kuehlschrank kuehlschrank, String dateipfad) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateipfad))) {
+            oos.writeObject(kuehlschrank);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    public static Kuehlschrank loadFromFile(String dateipfad) {
+        Kuehlschrank kuehlschrank = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateipfad))) {
+            kuehlschrank = (Kuehlschrank) ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kuehlschrank;
+    }
+
+
+}
