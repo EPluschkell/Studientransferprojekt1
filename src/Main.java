@@ -159,6 +159,8 @@ public class Main {
         }*/
         Kuehlschrank kuehlschrank = loadFromFile("test.txt");
 
+        char enter = 13;
+
 
         //frame und panel aufgesetzt
         JFrame frame = new JFrame("Kühlschrank");
@@ -219,24 +221,34 @@ public class Main {
         frame.setVisible(true);
         //aktionen, die passieren sollen, wenn der enter button gedrückt wird
         btn.addActionListener(e -> {
-            Lebensmittel placeholder;
+            /*Lebensmittel placeholder;
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
-            kuehlschrank.lebensmittelListe.add(placeholder);
+            kuehlschrank.lebensmittelListe.add(placeholder);*/
+            addToKuehlschrank(kuehlschrank);
             tableReset(dtm ,kuehlschrank);
-            inputName.setText("");
-            inputMonth.setText("");
-            inputDay.setText("");
-            inputYear.setText("");
-            inputAmount.setText("");
+            resetInputs();
         });
         delBtn.addActionListener(e -> {
             int placeholder = Integer.parseInt(delInput.getText());
             kuehlschrank.lebensmittelListe.remove(placeholder-1);
             tableReset(dtm, kuehlschrank);
+            delInput.setText("");
         });
         saveBtn.addActionListener(e -> {
             saveToFile(kuehlschrank, "test.txt");
         });
+
+        inputAmount.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_ENTER){
+                    addToKuehlschrank(kuehlschrank);
+                    tableReset(dtm, kuehlschrank);
+                    resetInputs();
+                }
+            }
+        });
+
 
     }
     public static void main(String[] args) {
@@ -285,6 +297,19 @@ public class Main {
                 }
             }
         }
+    }
+    public void addToKuehlschrank(Kuehlschrank kuehlschrank){
+        Lebensmittel placeholder;
+        placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
+        kuehlschrank.lebensmittelListe.add(placeholder);
+    }
+
+    public void resetInputs(){
+        inputName.setText("");
+        inputMonth.setText("");
+        inputDay.setText("");
+        inputYear.setText("");
+        inputAmount.setText("");
     }
     public static void saveToFile(Kuehlschrank kuehlschrank, String dateipfad) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateipfad))) {
