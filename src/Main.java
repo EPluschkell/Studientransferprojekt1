@@ -222,13 +222,22 @@ public class Main {
         frame.getContentPane().add(tabpane);
         frame.setVisible(true);
         dtm.addTableModelListener(new TableModelListener() {
+
+            // 2 bugs, wenn man etwas hinzufügt, werden andere Werte überschrieben; wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
             @Override
             public void tableChanged(TableModelEvent e) {
                 for (int i = 0; i < dtm.getRowCount(); i++) {
-                    if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
-                        System.out.println("t3st"+kuehlschrank.lebensmittelListe.get(i).menge+"  "+dtm.getValueAt(i,1));
+                    int j=dtm.getRowCount();
+                    if (dtm.getValueAt(i,1).toString().matches("^g|^ml")|dtm.getValueAt(i,1).toString().isEmpty()){
+                        kuehlschrank.lebensmittelListe.remove(i);
+                        dtm.removeRow(i);
+                        i=j;
+                    }else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
+                        kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
                     }
                 }
+                //kuehlschrank.sortByMHD();
+                //tableReset(dtm,kuehlschrank);
             }
         });
         //aktionen, die passieren sollen, wenn der enter button gedrückt wird
@@ -297,7 +306,7 @@ public class Main {
 
     //Methode, um die table neu aufzubauen, nach mhd sortiert und mit allen Daten.
     public void tableReset(DefaultTableModel table, Kuehlschrank kuehlschrank){
-        kuehlschrank.sortByMHD();
+        //kuehlschrank.sortByMHD();
         if (table.getRowCount()!=0){
             table.removeRow(0);
             tableReset(table, kuehlschrank);

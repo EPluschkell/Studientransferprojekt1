@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="Delete button implmentiert und save button auch, mit speichern und laden der Datei">
-      <change afterPath="$PROJECT_DIR$/src/Kuehlschrank.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Lebensmittel.java" afterDir="false" />
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="Klassen ausgelagert, detector für änderung an Menge eingebaut.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1699022206621</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Klassen ausgelagert, detector für änderung an Menge eingebaut.">
+      <created>1700228194944</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1700228194944</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,29 +223,25 @@
     <MESSAGE value="Implementierung der GUI in der Main Methode mit ersten Kommentaren" />
     <MESSAGE value="pop up message, falls ein Lebensmittel abgelaufen ist." />
     <MESSAGE value="Delete button implmentiert und save button auch, mit speichern und laden der Datei" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete button implmentiert und save button auch, mit speichern und laden der Datei" />
+    <MESSAGE value="Klassen ausgelagert, detector für änderung an Menge eingebaut." />
+    <option name="LAST_COMMIT_MESSAGE" value="Klassen ausgelagert, detector für änderung an Menge eingebaut." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>228</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>225</line>
+          <line>227</line>
           <properties method="tableChanged">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>227</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
