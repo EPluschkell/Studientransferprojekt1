@@ -223,18 +223,19 @@ public class Main {
         frame.setVisible(true);
         dtm.addTableModelListener(new TableModelListener() {
 
-            // 2 bugs, wenn man etwas hinzufügt, werden andere Werte überschrieben; wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
+            // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
             @Override
             public void tableChanged(TableModelEvent e) {
-                for (int i = 0; i < dtm.getRowCount(); i++) {
-                    int j=dtm.getRowCount();
-                    if (dtm.getValueAt(i,1).toString().matches("^g|^ml")|dtm.getValueAt(i,1).toString().isEmpty()){
-                        kuehlschrank.lebensmittelListe.remove(i);
-                        dtm.removeRow(i);
-                        i=j;
-                    }else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
-                        kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
-                    }
+                for (int i = dtm.getRowCount()-1; i > 0; i--) {
+                    if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.lebensmittelListe.get(i).LebensmittelName)){
+                        if (dtm.getValueAt(i,1).toString().matches("^g|^ml")|dtm.getValueAt(i,1).toString().isEmpty()){
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            //dtm.removeRow(i);
+                            tableReset(dtm,kuehlschrank);
+                            //i=0;
+                        }else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
+                            kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
+                        }}
                 }
                 //kuehlschrank.sortByMHD();
                 //tableReset(dtm,kuehlschrank);
@@ -306,8 +307,17 @@ public class Main {
 
     //Methode, um die table neu aufzubauen, nach mhd sortiert und mit allen Daten.
     public void tableReset(DefaultTableModel table, Kuehlschrank kuehlschrank){
-        //kuehlschrank.sortByMHD();
-        if (table.getRowCount()!=0){
+        kuehlschrank.sortByMHD();
+        for (int i = table.getRowCount()-1; i >= 0; i--) {
+            table.removeRow(i);
+        }
+        for (int i = 0; i < kuehlschrank.lebensmittelListe.size(); i++) {
+            table.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
+            if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten) {
+                JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        /*if (table.getRowCount()!=0){
             table.removeRow(0);
             tableReset(table, kuehlschrank);
         }else {
@@ -317,7 +327,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
-        }
+        }*/
     }
     public void addToKuehlschrank(Kuehlschrank kuehlschrank){
         Lebensmittel placeholder;
