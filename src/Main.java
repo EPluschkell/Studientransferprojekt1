@@ -12,6 +12,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.*;
 import java.io.Serializable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import java.applet.*;
 
@@ -19,7 +21,7 @@ import java.applet.*;
 
 
 public class Main {
-    public static class Lebensmittel implements Serializable {
+    /*public static class Lebensmittel implements Serializable {
         //int id;
         String LebensmittelName;
         LocalDate MHD;
@@ -92,8 +94,8 @@ public class Main {
             return LebensmittelName + " mit Ablaufdatum "+MHD+", "+timeLeft+" Tage übrig. "+menge+einheit+", "+angebrochenString;
         }
 
-    }
-    public static class Kuehlschrank implements Serializable {
+    }*/
+    /*public static class Kuehlschrank implements Serializable {
         ArrayList<Lebensmittel> lebensmittelListe;
 
         public Kuehlschrank() {
@@ -122,7 +124,7 @@ public class Main {
                 }
             });
         }
-    }
+    }*/
 
     //deklarationen für die GUI
     private JTextField inputName;
@@ -137,9 +139,9 @@ public class Main {
     private JToggleButton btnAngebr;
     private JToggleButton btnGML;
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
-    public Main() {
+    public Main() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         //test daten, später mit Import gespeicherter daten auszuwechseln
-        /*if (loadFromFile("")==null){
+        if (loadFromFile("test.txt")==null){
             String name1 = "Rinderhack";
             LocalDate datum1 = LocalDate.of(2023,11,15);
             Boolean angebrochen1 = false;
@@ -156,12 +158,12 @@ public class Main {
             kuehlschrank.add(kaese);
             kuehlschrank.sortByMHD();
             saveToFile(kuehlschrank, "test.txt");
-        }*/
+        }
         Kuehlschrank kuehlschrank = loadFromFile("test.txt");
 
         char enter = 13;
 
-
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         //frame und panel aufgesetzt
         JFrame frame = new JFrame("Kühlschrank");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -219,6 +221,16 @@ public class Main {
         //die tabpane auf die frame setzen
         frame.getContentPane().add(tabpane);
         frame.setVisible(true);
+        dtm.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                for (int i = 0; i < dtm.getRowCount(); i++) {
+                    if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
+                        System.out.println("t3st"+kuehlschrank.lebensmittelListe.get(i).menge+"  "+dtm.getValueAt(i,1));
+                    }
+                }
+            }
+        });
         //aktionen, die passieren sollen, wenn der enter button gedrückt wird
         btn.addActionListener(e -> {
             /*Lebensmittel placeholder;
@@ -251,7 +263,7 @@ public class Main {
 
 
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         /*
         String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
