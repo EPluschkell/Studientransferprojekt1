@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="weitergearbeitet an tablemodellistener">
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="weitergearbeitet an tablemodellistener, bugfixes, ein paar änderungen an tablereset dafür">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700230917223</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="weitergearbeitet an tablemodellistener, bugfixes, ein paar änderungen an tablereset dafür">
+      <created>1700237542229</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1700237542229</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,7 +239,8 @@
     <MESSAGE value="Delete button implmentiert und save button auch, mit speichern und laden der Datei" />
     <MESSAGE value="Klassen ausgelagert, detector für änderung an Menge eingebaut." />
     <MESSAGE value="weitergearbeitet an tablemodellistener" />
-    <option name="LAST_COMMIT_MESSAGE" value="weitergearbeitet an tablemodellistener" />
+    <MESSAGE value="weitergearbeitet an tablemodellistener, bugfixes, ein paar änderungen an tablereset dafür" />
+    <option name="LAST_COMMIT_MESSAGE" value="weitergearbeitet an tablemodellistener, bugfixes, ein paar änderungen an tablereset dafür" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -244,8 +251,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>228</line>
-          <option name="timeStamp" value="7" />
+          <line>240</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

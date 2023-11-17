@@ -220,27 +220,46 @@ public class Main {
 
         //die tabpane auf die frame setzen
         frame.getContentPane().add(tabpane);
-        frame.setVisible(true);
+        frame.setVisible(true);/*
         dtm.addTableModelListener(new TableModelListener() {
 
             // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
             @Override
             public void tableChanged(TableModelEvent e) {
-                for (int i = dtm.getRowCount()-1; i > 0; i--) {
+                int testint = dtm.getRowCount()-1;
+                for (int i = testint; i >= 0; i--) {
                     if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.lebensmittelListe.get(i).LebensmittelName)){
-                        if (dtm.getValueAt(i,1).toString().matches("^g|^ml")|dtm.getValueAt(i,1).toString().isEmpty()){
+                        //dtm.getValueAt(i,1).toString().matches("^g|^ml");
+                        if (dtm.getValueAt(i,1).toString().isEmpty()){
                             kuehlschrank.lebensmittelListe.remove(i);
                             //dtm.removeRow(i);
                             tableReset(dtm,kuehlschrank);
                             //i=0;
-                        }else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
+                            System.out.println("test 2.1");
+                            break;
+                        }else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0){
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            //dtm.removeRow(i);
+                            tableReset(dtm,kuehlschrank);
+                            //i=0;
+                            System.out.println("test 2.2");
+                            break;
+                        }/*else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0){
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            //dtm.removeRow(i);
+                            tableReset(dtm,kuehlschrank);
+                            i=0;
+                            System.out.println("test 1");
+                        }*/ /*else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
                             kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
-                        }}
+                        }
+                        System.out.println("test 3");
+                    }
                 }
                 //kuehlschrank.sortByMHD();
                 //tableReset(dtm,kuehlschrank);
             }
-        });
+        });*/
         //aktionen, die passieren sollen, wenn der enter button gedrückt wird
         btn.addActionListener(e -> {
             /*Lebensmittel placeholder;
@@ -271,6 +290,38 @@ public class Main {
             }
         });
 
+        dtm.addTableModelListener(new TableModelListener() {
+
+            // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int testint = dtm.getRowCount()-1;
+                for (int i = testint; i >= 0; i--) {
+                    //check, ob wir auch die selben Gegenstände ansehen
+                    if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.lebensmittelListe.get(i).LebensmittelName)){
+                        //ist gar keine Menge mehr da?
+                        if (dtm.getValueAt(i,1).toString().isEmpty()){
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            tableReset(dtm,kuehlschrank);
+                            System.out.println("test 2.1");
+                            break;
+                        }
+                        //ist die Menge=0?
+                        else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0) {
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            tableReset(dtm, kuehlschrank);
+                            System.out.println("test 2.2");
+                            break;
+                        }
+                        //andere Menge, die geändert wurde wird auf die Lebensmittelliste überschrieben.
+                        else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
+                            kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
+                        }
+                        System.out.println("test 3");
+                    }
+                }
+            }
+        });
 
     }
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
