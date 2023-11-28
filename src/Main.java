@@ -7,84 +7,91 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.*;
+import java.io.Serializable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import java.applet.*;
+
+
 
 
 public class Main {
     /*public static class Lebensmittel implements Serializable {
         //int id;
-        String foodName;
-        LocalDate bestBeforeDate;
-        Boolean isOpen;
-        int quantity;
-        Boolean isGram; // true = g false = ml
-        Boolean isExpired; // true = ist abgelaufen
+        String LebensmittelName;
+        LocalDate MHD;
+        Boolean angebrochen;
+        int menge;
+        Boolean gml; // true = g false = ml
+        Boolean mhdueberschritten; // true = ist abgelaufen
         //Constructor für Lebensmittel Klasse
         public Lebensmittel(String Name, LocalDate Datum, Boolean Angebrochen, int Menge, Boolean Einheit){
-            foodName = Name;
-            bestBeforeDate = Datum;
-            isOpen = Angebrochen;
-            quantity = Menge;
-            isGram = Einheit;
+            LebensmittelName = Name;
+            MHD = Datum;
+            angebrochen = Angebrochen;
+            menge = Menge;
+            gml = Einheit;
             mhdBerechnung();
             //id = 1;
         }
         //default contructor, falls nichts angegeben wird.
         public Lebensmittel(){
-            foodName = "Default";
-            bestBeforeDate = LocalDate.now();
-            isOpen = false;
-            quantity = 1;
-            isGram = false;
+            LebensmittelName = "Default";
+            MHD = LocalDate.now();
+            angebrochen = false;
+            menge = 1;
+            gml = false;
             mhdBerechnung();
         }
 
         //ausgabe als object array, für die Ansicht in Tabelle nötig.
         public Object[] toArray(){
             mhdBerechnung();
-            long timeLeft = daysBetweenDates(LocalDate.now(),bestBeforeDate);
+            long timeLeft = daysBetweenDates(LocalDate.now(),MHD);
             String einheit;
-            if (isGram){
+            if (gml){
                 einheit = "g";
             }else {
                 einheit = "ml";
             }
             Object[] object = new Object[6];
-            object[0]= foodName;
-            object[1]=""+quantity+einheit;
-            object[2]=bestBeforeDate;
+            object[0]= LebensmittelName;
+            object[1]=""+menge+einheit;
+            object[2]=MHD;
             object[3]=timeLeft;
-            object[4]=isOpen;
-            object[5]=isExpired;
+            object[4]=angebrochen;
+            object[5]=mhdueberschritten;
             return object;
         }
         public void mhdBerechnung(){
-            isExpired= daysBetweenDates(LocalDate.now(), bestBeforeDate)<0;
+            mhdueberschritten= daysBetweenDates(LocalDate.now(), MHD)<0;
         }
         @Override
         public String toString(){
             String angebrochenString;
             String einheit;
-            long timeLeft = daysBetweenDates(LocalDate.now(),bestBeforeDate);
-            if (isOpen){
+            long timeLeft = daysBetweenDates(LocalDate.now(),MHD);
+            if (angebrochen){
                 angebrochenString = "Angebrochen";
             }else {
                 angebrochenString = "nicht Angebrochen";
             }
-            if (isGram){
+            if (gml){
                 einheit = "g";
             }else {
                 einheit = "ml";
             }
             if(timeLeft<0){
-                return foodName + " mit Ablaufdatum "+bestBeforeDate+" ist abgelaufen. "+quantity+einheit+", "+angebrochenString;
+                return LebensmittelName + " mit Ablaufdatum "+MHD+" ist abgelaufen. "+menge+einheit+", "+angebrochenString;
             } else if (timeLeft == 0) {
-                return foodName + " mit Ablaufdatum "+bestBeforeDate+" läuft heute ab. "+quantity+einheit+", "+angebrochenString;
+                return LebensmittelName + " mit Ablaufdatum "+MHD+" läuft heute ab. "+menge+einheit+", "+angebrochenString;
             }
-            return foodName + " mit Ablaufdatum "+bestBeforeDate+", "+timeLeft+" Tage übrig. "+quantity+einheit+", "+angebrochenString;
+            return LebensmittelName + " mit Ablaufdatum "+MHD+", "+timeLeft+" Tage übrig. "+menge+einheit+", "+angebrochenString;
         }
 
     }*/
@@ -104,7 +111,7 @@ public class Main {
             Collections.sort(lebensmittelListe, new Comparator<Lebensmittel>() {
                 @Override
                 public int compare(Lebensmittel lebensmittel1, Lebensmittel lebensmittel2) {
-                    return lebensmittel1.foodName.compareTo(lebensmittel2.foodName);
+                    return lebensmittel1.LebensmittelName.compareTo(lebensmittel2.LebensmittelName);
                 }
             });
         }
@@ -113,7 +120,7 @@ public class Main {
             Collections.sort(lebensmittelListe, new Comparator<Lebensmittel>() {
                 @Override
                 public int compare(Lebensmittel lebensmittel1, Lebensmittel lebensmittel2) {
-                    return lebensmittel1.bestBeforeDate.compareTo(lebensmittel2.bestBeforeDate);
+                    return lebensmittel1.MHD.compareTo(lebensmittel2.MHD);
                 }
             });
         }
@@ -145,14 +152,14 @@ public class Main {
             Food joghurt = new Food("Joghurt", LocalDate.of(2023, 10, 31), true, 200, false);
             Food kaese = new Food("Käse", LocalDate.of(2023, 11, 30), false, 300, true);
 
-            Refrigerator refrigerator = new Refrigerator();
-            refrigerator.add(Fleisch);
-            refrigerator.add(joghurt);
-            refrigerator.add(kaese);
-            refrigerator.sortByMHD();
-            saveToFile(refrigerator, "test.txt");
+            Refrigerator kuehlschrank = new Refrigerator();
+            kuehlschrank.add(Fleisch);
+            kuehlschrank.add(joghurt);
+            kuehlschrank.add(kaese);
+            kuehlschrank.sortByMHD();
+            saveToFile(kuehlschrank, "test.txt");
         }
-        Refrigerator refrigerator = loadFromFile("test.txt");
+        Refrigerator kuehlschrank = loadFromFile("test.txt");
 
         char enter = 13;
 
@@ -203,7 +210,7 @@ public class Main {
         DefaultTableModel dtm = new DefaultTableModel(0,0);
         dtm.setColumnIdentifiers(columnNames);
         table.setModel(dtm);
-        tableReset(dtm, refrigerator);
+        tableReset(dtm,kuehlschrank);
 
         //zweite pane und tabs aufsetzen
         JScrollPane scrollPane = new JScrollPane(table);
@@ -213,71 +220,32 @@ public class Main {
 
         //die tabpane auf die frame setzen
         frame.getContentPane().add(tabpane);
-        frame.setVisible(true);/*
-        dtm.addTableModelListener(new TableModelListener() {
-
-            // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
-            @Override
-            public void tableChanged(TableModelEvent e) {
-                int testint = dtm.getRowCount()-1;
-                for (int i = testint; i >= 0; i--) {
-                    if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.lebensmittelListe.get(i).foodName)){
-                        //dtm.getValueAt(i,1).toString().matches("^g|^ml");
-                        if (dtm.getValueAt(i,1).toString().isEmpty()){
-                            kuehlschrank.lebensmittelListe.remove(i);
-                            //dtm.removeRow(i);
-                            tableReset(dtm,kuehlschrank);
-                            //i=0;
-                            System.out.println("test 2.1");
-                            break;
-                        }else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0){
-                            kuehlschrank.lebensmittelListe.remove(i);
-                            //dtm.removeRow(i);
-                            tableReset(dtm,kuehlschrank);
-                            //i=0;
-                            System.out.println("test 2.2");
-                            break;
-                        }/*else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0){
-                            kuehlschrank.lebensmittelListe.remove(i);
-                            //dtm.removeRow(i);
-                            tableReset(dtm,kuehlschrank);
-                            i=0;
-                            System.out.println("test 1");
-                        }*/ /*else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.lebensmittelListe.get(i).toArray()[1])){
-                            kuehlschrank.lebensmittelListe.get(i).quantity= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
-                        }
-                        System.out.println("test 3");
-                    }
-                }
-                //kuehlschrank.sortByMHD();
-                //tableReset(dtm,kuehlschrank);
-            }
-        });*/
+        frame.setVisible(true);
         //aktionen, die passieren sollen, wenn der enter button gedrückt wird
         btn.addActionListener(e -> {
             /*Lebensmittel placeholder;
             placeholder = new Lebensmittel(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
             kuehlschrank.lebensmittelListe.add(placeholder);*/
-            addToKuehlschrank(refrigerator);
-            tableReset(dtm , refrigerator);
+            addToRefrigerator(kuehlschrank);
+            tableReset(dtm ,kuehlschrank);
             resetInputs();
         });
         delBtn.addActionListener(e -> {
             int placeholder = Integer.parseInt(delInput.getText());
-            refrigerator.foodList.remove(placeholder-1);
-            tableReset(dtm, refrigerator);
+            kuehlschrank.foodList.remove(placeholder-1);
+            tableReset(dtm, kuehlschrank);
             delInput.setText("");
         });
         saveBtn.addActionListener(e -> {
-            saveToFile(refrigerator, "test.txt");
+            saveToFile(kuehlschrank, "test.txt");
         });
 
         inputAmount.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_ENTER){
-                    addToKuehlschrank(refrigerator);
-                    tableReset(dtm, refrigerator);
+                    addToRefrigerator(kuehlschrank);
+                    tableReset(dtm, kuehlschrank);
                     resetInputs();
                 }
             }
@@ -291,24 +259,24 @@ public class Main {
                 int testint = dtm.getRowCount()-1;
                 for (int i = testint; i >= 0; i--) {
                     //check, ob wir auch die selben Gegenstände ansehen
-                    if (dtm.getValueAt(i,0).toString().equals(refrigerator.foodList.get(i).foodName)){
+                    if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.foodList.get(i).foodName)){
                         //ist gar keine Menge mehr da?
                         if (dtm.getValueAt(i,1).toString().isEmpty()){
-                            refrigerator.foodList.remove(i);
-                            tableReset(dtm, refrigerator);
+                            kuehlschrank.foodList.remove(i);
+                            tableReset(dtm,kuehlschrank);
                             System.out.println("test 2.1");
                             break;
                         }
                         //ist die Menge=0?
                         else if(Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml","0"))==0) {
-                            refrigerator.foodList.remove(i);
-                            tableReset(dtm, refrigerator);
+                            kuehlschrank.foodList.remove(i);
+                            tableReset(dtm, kuehlschrank);
                             System.out.println("test 2.2");
                             break;
                         }
                         //andere Menge, die geändert wurde wird auf die Lebensmittelliste überschrieben.
-                        else if (!dtm.getValueAt(i,1).toString().equals(refrigerator.foodList.get(i).toArray()[1])){
-                            refrigerator.foodList.get(i).quantity = Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
+                        else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.foodList.get(i).toArray()[1])){
+                            kuehlschrank.foodList.get(i).quantity= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
                         }
                         System.out.println("test 3");
                     }
@@ -350,15 +318,15 @@ public class Main {
     }
 
     //Methode, um die table neu aufzubauen, nach mhd sortiert und mit allen Daten.
-    public void tableReset(DefaultTableModel table, Refrigerator refrigerator){
-        refrigerator.sortByMHD();
+    public void tableReset(DefaultTableModel table, Refrigerator kuehlschrank){
+        kuehlschrank.sortByMHD();
         for (int i = table.getRowCount()-1; i >= 0; i--) {
             table.removeRow(i);
         }
-        for (int i = 0; i < refrigerator.foodList.size(); i++) {
-            table.addRow(refrigerator.foodList.get(i).toArray());
-            if (refrigerator.foodList.get(i).isExpired) {
-                JOptionPane.showMessageDialog(null, refrigerator.foodList.get(i).foodName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+        for (int i = 0; i < kuehlschrank.foodList.size(); i++) {
+            table.addRow(kuehlschrank.foodList.get(i).toArray());
+            if (kuehlschrank.foodList.get(i).isExpired) {
+                JOptionPane.showMessageDialog(null, kuehlschrank.foodList.get(i).foodName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         /*if (table.getRowCount()!=0){
@@ -367,16 +335,16 @@ public class Main {
         }else {
             for (int i = 0; i < kuehlschrank.lebensmittelListe.size(); i++) {
                 table.addRow(kuehlschrank.lebensmittelListe.get(i).toArray());
-                if (kuehlschrank.lebensmittelListe.get(i).isExpired){
-                    JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).foodName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+                if (kuehlschrank.lebensmittelListe.get(i).mhdueberschritten){
+                    JOptionPane.showMessageDialog(null, kuehlschrank.lebensmittelListe.get(i).LebensmittelName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         }*/
     }
-    public void addToKuehlschrank(Refrigerator refrigerator){
+    public void addToRefrigerator(Refrigerator kuehlschrank){
         Food placeholder;
         placeholder = new Food(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
-        refrigerator.foodList.add(placeholder);
+        kuehlschrank.foodList.add(placeholder);
     }
 
     public void resetInputs(){
@@ -386,22 +354,22 @@ public class Main {
         inputYear.setText("");
         inputAmount.setText("");
     }
-    public static void saveToFile(Refrigerator refrigerator, String dateipfad) {
+    public static void saveToFile(Refrigerator kuehlschrank, String dateipfad) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateipfad))) {
-            oos.writeObject(refrigerator);
+            oos.writeObject(kuehlschrank);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static Refrigerator loadFromFile(String dateipfad) {
-        Refrigerator refrigerator = null;
+        Refrigerator kuehlschrank = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateipfad))) {
-            refrigerator = (Refrigerator) ois.readObject();
+            kuehlschrank = (Refrigerator) ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return refrigerator;
+        return kuehlschrank;
     }
 
 
