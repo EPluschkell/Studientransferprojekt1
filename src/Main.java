@@ -7,17 +7,10 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import javax.swing.*;
-import java.io.Serializable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import java.applet.*;
-
-
 
 
 public class Main {
@@ -136,8 +129,8 @@ public class Main {
     private JButton btn;
     private JButton delBtn;
     private JButton saveBtn;
-    private JToggleButton btnAngebr;
-    private JToggleButton btnGML;
+    private JToggleButton btnIsOpen;
+    private JToggleButton btnIsGram;
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
     public Main() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         //test daten, später mit Import gespeicherter daten auszuwechseln
@@ -190,10 +183,10 @@ public class Main {
         panel.add(label5);
         inputAmount = new JTextField(7);
         panel.add(inputAmount);
-        btnGML = new JToggleButton("In g oder ml?");
-        panel.add(btnGML);
-        btnAngebr=new JToggleButton("Angebrochen?");
-        panel.add(btnAngebr);
+        btnIsGram = new JToggleButton("In g oder ml?");
+        panel.add(btnIsGram);
+        btnIsOpen =new JToggleButton("Angebrochen?");
+        panel.add(btnIsOpen);
         btn = new JButton("Enter");
         panel.add(btn);
         JLabel label6 = new JLabel("Nummer zum Löschen:");
@@ -256,8 +249,8 @@ public class Main {
             // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
             @Override
             public void tableChanged(TableModelEvent e) {
-                int testint = dtm.getRowCount()-1;
-                for (int i = testint; i >= 0; i--) {
+                int testint = dtm.getRowCount() - 1;
+                for (int i = 0; i <= testint; i++) {
                     //check, ob wir auch die selben Gegenstände ansehen
                     if (dtm.getValueAt(i,0).toString().equals(kuehlschrank.foodList.get(i).foodName)){
                         //ist gar keine Menge mehr da?
@@ -278,16 +271,25 @@ public class Main {
                         else if (!dtm.getValueAt(i,1).toString().equals(kuehlschrank.foodList.get(i).toArray()[1])){
                             kuehlschrank.foodList.get(i).quantity= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
                         }
-                        System.out.println("test 3");
-                    }
+                        /*if(dtm.getValueAt(i, 1).toString().matches("[1-9]")){
+                            kuehlschrank.lebensmittelListe.get(i).menge= Integer.parseInt(dtm.getValueAt(i,1).toString().replaceAll("g|ml",""));
+                        }else {
+                            kuehlschrank.lebensmittelListe.remove(i);
+                            dtm.removeRow(i);
+                            //tableReset(dtm,kuehlschrank);
+                            System.out.println("test 2.3");
+                            break;
+                        }*/
+                    System.out.println("test 3");
                 }
             }
+        }
         });
 
     }
     public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        /*
-        String name1 = "Rinderhack";
+
+        /*String name1 = "Rinderhack";
         LocalDate datum1 = LocalDate.of(2023,11,15);
         Boolean angebrochen1 = false;
         int menge1 = 500;
@@ -311,22 +313,22 @@ public class Main {
         Main app = new Main();
     }
 
-    public static long daysBetweenDates(LocalDate datum1, LocalDate datum2) {
+    public static long daysBetweenDates(LocalDate date1, LocalDate date2) {
         // datum1  = heute, datum2 = mhd
-        long Tage = datum2.toEpochDay() - datum1.toEpochDay();
+        long Tage = date2.toEpochDay() - date1.toEpochDay();
         return Tage;
     }
 
     //Methode, um die table neu aufzubauen, nach mhd sortiert und mit allen Daten.
-    public void tableReset(DefaultTableModel table, Refrigerator kuehlschrank){
-        kuehlschrank.sortByMHD();
+    public void tableReset(DefaultTableModel table, Refrigerator refrigerator){
+        refrigerator.sortByMHD();
         for (int i = table.getRowCount()-1; i >= 0; i--) {
             table.removeRow(i);
         }
-        for (int i = 0; i < kuehlschrank.foodList.size(); i++) {
-            table.addRow(kuehlschrank.foodList.get(i).toArray());
-            if (kuehlschrank.foodList.get(i).isExpired) {
-                JOptionPane.showMessageDialog(null, kuehlschrank.foodList.get(i).foodName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
+        for (int i = 0; i < refrigerator.foodList.size(); i++) {
+            table.addRow(refrigerator.foodList.get(i).toArray());
+            if (refrigerator.foodList.get(i).isExpired) {
+                JOptionPane.showMessageDialog(null, refrigerator.foodList.get(i).foodName + " ist abgelaufen!", "InfoBox: Abgelaufen", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         /*if (table.getRowCount()!=0){
@@ -341,10 +343,10 @@ public class Main {
             }
         }*/
     }
-    public void addToRefrigerator(Refrigerator kuehlschrank){
+    public void addToRefrigerator(Refrigerator refrigerator){
         Food placeholder;
-        placeholder = new Food(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())),btnAngebr.isSelected(),Integer.parseInt(inputAmount.getText()),btnGML.isSelected());
-        kuehlschrank.foodList.add(placeholder);
+        placeholder = new Food(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())), btnIsOpen.isSelected(),Integer.parseInt(inputAmount.getText()), btnIsGram.isSelected());
+        refrigerator.foodList.add(placeholder);
     }
 
     public void resetInputs(){
@@ -354,22 +356,22 @@ public class Main {
         inputYear.setText("");
         inputAmount.setText("");
     }
-    public static void saveToFile(Refrigerator kuehlschrank, String dateipfad) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dateipfad))) {
-            oos.writeObject(kuehlschrank);
+    public static void saveToFile(Refrigerator refrigerator, String fileLocation) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileLocation))) {
+            oos.writeObject(refrigerator);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static Refrigerator loadFromFile(String dateipfad) {
-        Refrigerator kuehlschrank = null;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dateipfad))) {
-            kuehlschrank = (Refrigerator) ois.readObject();
+    public static Refrigerator loadFromFile(String fileLocation) {
+        Refrigerator refrigerator = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileLocation))) {
+            refrigerator = (Refrigerator) ois.readObject();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return kuehlschrank;
+        return refrigerator;
     }
 
 
