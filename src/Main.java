@@ -133,17 +133,17 @@ public class Main {
     private JToggleButton btnIsGram;
     String[] columnNames = {"Lebensmittel","Menge","Ablaufdatum","Zeit Übrig","Angebrochen?","Abgelaufen?"};
     public Main() throws UnsupportedLookAndFeelException, ClassNotFoundException, InstantiationException, IllegalAccessException {
-        //test daten, später mit Import gespeicherter daten auszuwechseln
+        //test daten, falls keine Datei vorhanden ist
         if (loadFromFile("test.txt")==null){
             String name1 = "Rinderhack";
-            LocalDate datum1 = LocalDate.of(2023,11,15);
+            LocalDate datum1 = LocalDate.of(2024,03,05);
             Boolean angebrochen1 = false;
             int menge1 = 500;
             boolean einheit1 = true; //gramm
 
             Food Fleisch = new Food(name1,datum1,angebrochen1,menge1,einheit1);
-            Food joghurt = new Food("Joghurt", LocalDate.of(2023, 10, 31), true, 200, false);
-            Food kaese = new Food("Käse", LocalDate.of(2023, 11, 30), false, 300, true);
+            Food joghurt = new Food("Joghurt", LocalDate.of(2024, 03, 8), true, 200, false);
+            Food kaese = new Food("Käse", LocalDate.of(2024, 03, 11), false, 300, true);
 
             Refrigerator kuehlschrank = new Refrigerator();
             kuehlschrank.add(Fleisch);
@@ -316,6 +316,7 @@ public class Main {
         Main app = new Main();
     }
 
+    //Berechnung, wie viele Tage zwischen zwei Daten ist
     public static long daysBetweenDates(LocalDate date1, LocalDate date2) {
         // datum1  = heute, datum2 = mhd
         long Tage = date2.toEpochDay() - date1.toEpochDay();
@@ -346,12 +347,14 @@ public class Main {
             }
         }*/
     }
+    //Methode, um die Inputs in den Kühlschrank anzunehmen
     public void addToRefrigerator(Refrigerator refrigerator){
         Food placeholder;
         placeholder = new Food(inputName.getText(),LocalDate.of(Integer.parseInt(inputYear.getText()),Integer.parseInt(inputMonth.getText()),Integer.parseInt(inputDay.getText())), btnIsOpen.isSelected(),Integer.parseInt(inputAmount.getText()), btnIsGram.isSelected());
         refrigerator.foodList.add(placeholder);
     }
 
+    //Methode, um die Eingabefelder für Kühlschrank leer zu setzen
     public void resetInputs(){
         inputName.setText("");
         inputMonth.setText("");
@@ -359,6 +362,7 @@ public class Main {
         inputYear.setText("");
         inputAmount.setText("");
     }
+    //Methode, um die Daten in eine Datei zu speichern.
     public static void saveToFile(Refrigerator refrigerator, String fileLocation) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileLocation))) {
             oos.writeObject(refrigerator);
@@ -367,6 +371,7 @@ public class Main {
         }
     }
 
+    //Methode, um Daten aus der Datei zu laden.
     public static Refrigerator loadFromFile(String fileLocation) {
         Refrigerator refrigerator = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileLocation))) {

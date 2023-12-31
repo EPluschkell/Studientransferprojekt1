@@ -7,7 +7,6 @@ import static src.Main.daysBetweenDates;
 
 
 public class Food implements Serializable {
-        //int id;
         String foodName;
         LocalDate bestBeforeDate;
         Boolean isOpen;
@@ -22,9 +21,8 @@ public class Food implements Serializable {
             this.quantity = quantity;
             this.isGram = isGram;
             calculateExpiredStatus();
-            //id = 1;
         }
-        //default contructor, falls nichts angegeben wird.
+        //Default contructor, falls nichts angegeben wird.
         public Food(){
             foodName = "Default";
             bestBeforeDate = LocalDate.now();
@@ -34,7 +32,7 @@ public class Food implements Serializable {
             calculateExpiredStatus();
         }
 
-        //ausgabe als object array, für die Ansicht in Tabelle nötig.
+        //Ausgabe als object array, für die Ansicht in Tabelle nötig.
         public Object[] toArray(){
             calculateExpiredStatus();
             long timeLeft = daysBetweenDates(LocalDate.now(), bestBeforeDate);
@@ -48,6 +46,8 @@ public class Food implements Serializable {
             object[5]= isExpired;
             return object;
         }
+
+        //Berechnung, ob das Lebensmittel abgelaufen ist oder nicht.
         public void calculateExpiredStatus(){
             isExpired = daysBetweenDates(LocalDate.now(), bestBeforeDate)<0;
         }

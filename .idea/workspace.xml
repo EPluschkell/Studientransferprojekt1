@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="Methoden refactored, damit Sprache überall gleich ist.">
+    <list default="true" id="ec8571a3-9a99-4172-ac9a-53fd1e56da34" name="Changes" comment="Kommentare zugefügt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Food.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701436949519</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Kommentare zugefügt">
+      <created>1704018673938</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1704018673938</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -258,7 +265,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -280,7 +299,8 @@
     <MESSAGE value="weitergearbeitet an tablemodellistener" />
     <MESSAGE value="weitergearbeitet an tablemodellistener, bugfixes, ein paar änderungen an tablereset dafür" />
     <MESSAGE value="Methoden refactored, damit Sprache überall gleich ist." />
-    <option name="LAST_COMMIT_MESSAGE" value="Methoden refactored, damit Sprache überall gleich ist." />
+    <MESSAGE value="Kommentare zugefügt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kommentare zugefügt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
