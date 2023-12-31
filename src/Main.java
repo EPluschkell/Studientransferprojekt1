@@ -223,17 +223,20 @@ public class Main {
             tableReset(dtm ,kuehlschrank);
             resetInputs();
         });
+        //delete button
         delBtn.addActionListener(e -> {
             int placeholder = Integer.parseInt(delInput.getText());
             kuehlschrank.foodList.remove(placeholder-1);
             tableReset(dtm, kuehlschrank);
             delInput.setText("");
         });
+        //save button, speichern
         saveBtn.addActionListener(e -> {
             saveToFile(kuehlschrank, "test.txt");
         });
 
         inputAmount.addKeyListener(new KeyAdapter() {
+            //Detektieren, ob eine Taste gedrückt wird, wenn man im inputAmount drin ist. Wenn diese Taste Enter ist, werden die Inputs ausgewertet.
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_ENTER){
@@ -245,7 +248,7 @@ public class Main {
         });
 
         dtm.addTableModelListener(new TableModelListener() {
-
+            //Änderungen an der Tabelle detektieren, sehen ob sich Mengen geändert haben, falls sie = 0 sind, löschen
             // 1 bug, wenn man das letzte Lebensmittel durch 0 Menge löscht, bekommt man eine Exception
             @Override
             public void tableChanged(TableModelEvent e) {
